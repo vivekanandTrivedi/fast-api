@@ -32,3 +32,34 @@ def update_item(name: str, items: Item):
             return item
     return {"msg": "Item not found"}
 
+
+@app.get("/items/{item_id}")
+def read_item(item_id: int):
+    return {"item_id": item_id}
+
+@app.get("/vendor")
+def query_params(name: str = None):
+    return {"name" : name}
+
+@app.get("/products")
+def query_params(limit: int = 10, name : str = None):
+    return {
+        "limit" : limit,
+        "name" : name
+    }
+
+class Country(BaseModel):
+    country_name : str
+    country_code : int
+
+class Vendor(BaseModel):
+    name: str
+    email: str
+    password: str
+    country_of_origin: Country
+
+@app.post("/vendor")
+def create_user(vendor : Vendor):
+    return {
+        "data" : vendor
+    }
