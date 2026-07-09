@@ -2,14 +2,14 @@ from fastapi import FastAPI, Request
 import time
 app = FastAPI()
 
-# @app.middleware("http")
-# async def my_middleware(request: Request, call_next):
-#     print("Request received")
-#
-#     response = await call_next(request)
-#
-#     print("Response sent")
-#     return response
+@app.middleware("http")
+async def my_middleware(request: Request, call_next):
+    print("Request received")
+
+    response = await call_next(request)
+
+    print("Response sent")
+    return response
 
 @app.middleware("http")
 
