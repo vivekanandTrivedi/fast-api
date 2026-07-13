@@ -43,4 +43,5 @@ def create_users(name : str, db: Session = Depends(get_db)):
     db.refresh(user)
     return {
         "message": "success",
+        "data": user
     }
