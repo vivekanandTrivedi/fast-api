@@ -34,3 +34,14 @@ def read_roots(db: Session = Depends(get_db)):
     return {
         "message": "success"
     }
+
+@app.post("/users")
+def create_users(name : str, db: Session = Depends(get_db)):
+    user = User(name=name)
+    db.add(user)
+    db.commit()
+    db.refresh(user)
+    return {
+        "message": "success",
+        "data": user
+    }
